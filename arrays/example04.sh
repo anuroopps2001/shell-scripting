@@ -1,46 +1,51 @@
 #!/bin/bash
 
-set -e
-
 nums=()
 
+# collect integers from user
 while true; do
   read -p "Enter any integer (or type 'done' to finish): " num
-  if [[ $num == 'done' ]]; then
+  if [[ "$num" == "done" ]]; then
     break
-  elif ! [[ $num =~ ^-?[0-9]+$ ]]; then
-    echo "Invalid value..!!"
+  elif ! [[ "$num" =~ ^-?[0-9]+$ ]]; then
+    echo "Invalid value..!! Please enter an integer or 'done'."
     continue
   else
-    nums+=($num)
+    nums+=("$num")
   fi
 done
 
-if (( ${#num[@]} == 0 )); then
-  echo "No numbers provided"
+# if user entered nothing, exit
+if (( ${#nums[@]} == 0 )); then
+  echo "No numbers provided. Exiting."
   exit 1
 fi
 
-find_sum(){
-  local sum=0
-  for i in $@; do
-    sum=$(( $i+$sum))
+# function: calculate sum of arguments and print it
+find_sum() {
+  local total=0
+  for n in "$@"; do
+    (( total += n ))
   done
-  echo "$sum"
+  echo "$total"    # return via stdout
 }
 
-find_avg(){
-  local sum=$1
+# function: calculate average given sum and count
+find_avg() {
+  local sum_val=$1
   local count=$2
-  if (( $count == 0 )); then 
+  # integer division
+  if (( count == 0 )); then
     echo "0"
   else
-    avg=$(( $sum/$count} ))
+    echo $(( sum_val / count ))
   fi
 }
 
-sum=$(find_sum ${nums[@]})
-avg=$(find_avg $sum ${#nums[@]})
+# call functions and capture their outputs
+sum=$(find_sum "${nums[@]}")
+avg=$(find_avg "$sum" "${#nums[@]}")
 
-echo "Sum: " $sum
-echo "Average: " $avg
+echo "Sum: $sum"
+echo "Average: $avg"
+
