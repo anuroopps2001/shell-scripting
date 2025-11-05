@@ -25,4 +25,10 @@ ${array_name[@]:start_index} #To access all the elements in an array from the gi
 ```
 ```bash
 ${array_name[@]:start_index:No_Of_array_elements_to_be_accessed} #To access specific number of elements from the start index specified inside the array
-``
+```
+
+#### unset command
+It'used to remove the array elements
+```bash
+$ unset array_name[index_value]
+```
