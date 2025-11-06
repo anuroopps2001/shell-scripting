@@ -1,0 +1,6 @@
+Running
+Pending
+Running
+CrashLoopBackOff
+Running
+

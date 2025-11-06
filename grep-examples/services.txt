@@ -1,0 +1,6 @@
+nginx
+httpd
+mysql
+redis
+mongodb
+
